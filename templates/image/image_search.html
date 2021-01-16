@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block meta %}
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="description" content="{{ site.description }}">
+    <meta name="author" content="{{ site.name }}">
+    <title>{{ site.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <p> <strong> Search result for : {{ q }}
+        <div class="col-md-8 my-4">
+            {% for image in images %}
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <div id="{{ image.image.slug }}" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{{ image.image_entity.picture.url}}" class="d-block w-100"
+                                            style="object-fit: cover; height: 240px"
+                                            alt="image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-10 col-6">
+                                        <a class="text-dark" href="{% url 'show_image' image.image.slug%}">
+                                            <h3 class="card-title">{{ image.image.name }}</h3></a>
+                                    </div>
+                                </div>
+                                <p class="card-title small">{{ image.image.user.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% comment %} <nav aria-label="pagination">
+                {% if images.has_other_pages %}
+                    <ul class="pagination my-3">
+                        {% if images.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?{% url_replace page=images.previous_page_number %}"
+                                tabindex="-1">Previous</a> 
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for i in images.paginator.page_range %}
+                            {% if images.number == i %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if images.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?{% url_replace page=images.next_page_number %}"
+                                tabindex="-1">Next</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </nav> {% endcomment %}
+        </div>
+        <div class="row">
+            {% comment %} {% include 'apartment/apartment_masonry.html' %} {% endcomment %}
+            <!--Sidebar-->
+            
+
+
+        </div>
+    </div>
+{% endblock %}

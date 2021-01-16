@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+
+
+{% block content %}
+    <form class="form-signin" action="" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In">
+        <p class="mt-5 mb-3 text-muted">&copy; {{ site.name|lower }} | 2020</p>
+    </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+
+{% block meta %}
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="description" content="{{ site.description }}">
+    <meta name="author" content="{{ site.name }}">
+    <title>{{ site.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        <h1 class="h3 mb-3 font-weight-normal">Please upload image</h1>
+        {% csrf_token %}
+        <table>
+            {{ form}}
+        </table>
+
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+    </div>
+{% endblock %}

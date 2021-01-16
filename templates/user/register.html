@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+
+{% block meta %}
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="description" content="{{ site.description }}">
+    <meta name="author" content="{{ site.name }}">
+    <title>{{ site.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <form class="form-signin" action="" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+        {% csrf_token %}
+        <table>
+            {{ form}}
+        </table>
+
+        <div class="checkbox_wrap terms-checkbox">
+                <input type="checkbox" name="terms_conditions" id="terms_conditions" required>
+                <label for="terms_conditions">I agree to the
+                <a href="/terms_of_use" target="_blank">Terms of Use</a>
+                and <a href="/privacy_policy" target="_blank">Privacy Policy</a>.
+                </label>
+        </div>
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up">
+        <p class="mt-5 mb-3 text-muted">&copy; {{ site.name|lower }} | 2020</p>
+    </form>
+{% endblock %}
